@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import edu.hm.dako.chat.common.SystemConstants?>
+<VBox alignment="CENTER_LEFT" padding="$x2" prefHeight="340.0" prefWidth="290.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.hm.dako.chat.client.LogInGuiController">
+  <children>
+    <TextField fx:id="txtUsername" prefHeight="25.0" prefWidth="150.0" promptText="Benutzername" onKeyPressed="#handleKeyPressed" />
+      <Separator layoutX="15.0" layoutY="147.0" prefWidth="200.0" />
+      <Label fx:id="lblIP" prefHeight="17.0" prefWidth="200.0" text="IP-Adresse des Servers: " />
+    <TextField fx:id="txtServername" prefHeight="25.0" prefWidth="185.0" promptText="127.0.0.1" text="127.0.0.1" onKeyPressed="#handleKeyPressed"/>
+      <Label fx:id="lblServerPort" prefHeight="17.0" prefWidth="99.0" text="Serverport:" />
+    <TextField fx:id="txtServerPort" prefHeight="25.0" prefWidth="185.0" promptText="50001" text="50001" onKeyPressed="#handleKeyPressed"/>
+      <Label nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="99.0" text="Serverauswahl:" />
+      <ComboBox fx:id="comboServerType" prefHeight="25.0" prefWidth="2000.0" onKeyPressed="#handleKeyPressed">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+              </FXCollections>
+          </items>
+        <value>
+          <SystemConstants fx:constant="IMPL_TCP_SIMPLE" />
+        </value>
+      </ComboBox>
+    <Separator prefWidth="200.0" />
+    <HBox alignment="CENTER" spacing="10.0">
+      <children>
+        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#performLogin" text="Einloggen" HBox.hgrow="ALWAYS">
+          <font>
+            <Font name="System Bold" size="12.0" fx:id="x1" />
+          </font>
+        </Button>
+        <Button font="$x1" mnemonicParsing="false" onAction="#exitButtonReaction" text="Beenden" HBox.hgrow="ALWAYS" />
+      </children>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x2" />
+      </padding>
+    </HBox>
+  </children>
+</VBox>
+

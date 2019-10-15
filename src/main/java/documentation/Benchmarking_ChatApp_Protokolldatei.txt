@@ -1,0 +1,33 @@
+# 
+# Satzaufbau fuer Benchmarkink-Protokolldatei (Dateiname: Benchmarking-ChatApp-Protokolldatei):
+#
+# 01 Messungstyp als String
+# 02 Implementierungstyp als String
+# 03 Anzahl Client-Threads
+# 04 Anzahl (geplante) Nachrichten je Client
+# 05 10%-Percentile aller gemessenen RTTs in ms
+# 06 25%-Percentile aller gemessenen RTTs in ms
+# 07 50%-Percentile aller gemessenen RTTs in ms
+# 08 75%-Percentile aller gemessenen RTTs in ms
+# 09 90%-Percentile aller gemessenen RTTs in ms
+# 10 Spannweite (Range) in ms
+# 11 Interquartilsabstand (IQR) in ms
+# 12 RTT-Minimum aller gemessenen RTTs in ms
+# 13 RTT-Maximum aller gemessenen RTTs in ms
+# 14 Arithmetisches Mittel aller gemessenen RTTs in ms
+# 15 Standardabweichung ueber alle gemessenen RTTs in ms
+# 16 Durchschnittliche Serverbearbeitungszeit in ms
+# 17 Anzahl geplanter Requests/Responses
+# 18 Anzahl gesendeter Requests
+# 19 Anzahl empfangener Responses
+# 20 Anzahl verlorener Responses
+# 21 Anzahl aller Uebertragungswiederholungen (nur fuer UDP relevant)
+# 22 Anzahl aller vom Server gesendete Events-Nachrichten
+# 23 Anzahl aller vom Server empfangenen Event-Bestaetigungen (Confirm-Event)
+# 24 Anzahl aller vom Server nicht erhaltenen Event-Bestaetigungen
+# 25 Anzahl aller Wiederholungen von Events (fuer unzuverlaessige Verbindungen wie UDP)
+# 26 Maximale Heap-Size des Clients in MiB
+# 27 Durchschnittliche CPU-Auslastung des Clients in %
+# 28 Startzeit der Messung (Zeitstempel Datum/Uhrzeit)
+# 29 Endezeit der Messung (Zeitstempel Datum/Uhrzeit)
+#
