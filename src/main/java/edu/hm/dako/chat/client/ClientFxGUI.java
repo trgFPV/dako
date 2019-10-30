@@ -40,6 +40,7 @@ public class ClientFxGUI extends Application implements ClientUserInterface {
 		launch(args);
 	}
 
+
 	/**
 	 * Kommunikationsschnittstelle zur Kommunikation mit dem Chat-Server
 	 * aktivieren
