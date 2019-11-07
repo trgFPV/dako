@@ -49,10 +49,16 @@ public class AuditLogTcpServer {
 			Connection connection = socket.accept();
 			CSVAuditLogWriter calw = new CSVAuditLogWriter();
 			System.out.println("Verbindung von ChatServer erhalten");
+
 			while(true) {
 				AuditLogPDU recievedPdu = (AuditLogPDU) connection.receive();
 				System.out.println("M: " + recievedPdu.getMessage());
-		//		calw.writeAuditLogPDU(recievedPdu);
+				try {
+					calw.writeAuditLogPDU(recievedPdu);
+				}
+				catch (NullPointerException npe) {
+					System.out.println("NPE in Server");
+				}
 			}
 		}
 		catch (BindException e) {
