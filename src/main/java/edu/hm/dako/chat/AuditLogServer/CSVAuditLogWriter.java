@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import edu.hm.dako.chat.common.AuditLogPDU;
 import org.apache.commons.csv.CSVFormat;
@@ -29,8 +32,6 @@ public class CSVAuditLogWriter {
                     StandardOpenOption.CREATE);
 
             csvout = new CSVPrinter(writer, CSVFormat.DEFAULT);
-
-
 
             csvout.printRecord(header);
             csvout.flush();
@@ -56,14 +57,15 @@ public class CSVAuditLogWriter {
             //out = new FileWriter(FILENAME);
 
             csvout = new CSVPrinter(writer, CSVFormat.DEFAULT);
-            
+            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+            Date date = new Date(alp.getAuditTime());
 
             String[] record = {
                     alp.getClientThreadName(),
                     alp.getMessage(),
                     alp.getServerThreadName(),
                     alp.getUserName(),
-                    String.valueOf(alp.getAuditTime()),
+                    simple.format(date),
                     String.valueOf(alp.getPduType())
             };
 

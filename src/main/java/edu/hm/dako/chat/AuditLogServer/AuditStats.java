@@ -46,11 +46,13 @@ public class AuditStats {
                 if (!seenUserNames.contains(userName))
                     seenUserNames.add(userName);
 
-                switch(record.get(5))  {
-                    case "Login ": loginPDUCounter = loginPDUCounter + 1;
+                String pduType = record.get(5).replace("\"","").trim();
+
+                switch(pduType)  {
+                    case "Login": loginPDUCounter = loginPDUCounter + 1;
                     break;
 
-                    case "Chat  ": chatPDUCounter = chatPDUCounter + 1;
+                    case "Chat": chatPDUCounter = chatPDUCounter + 1;
                     chatMessageLength = chatMessageLength + record.get(1).length();
                     break;
 
@@ -72,7 +74,7 @@ public class AuditStats {
         System.out.println("Number of invalid CSV-Records: " + invalidRecords);
         System.out.println("Total length of Message: " + chatMessageLength);
         System.out.println("Average Chat-Message Length " + chatMessageLength/chatPDUCounter);
-        System.out.println("Total # of individual users:" + seenUserNames.size());
+        System.out.println("Total # of individual users: " + seenUserNames.size());
 
     }
 
