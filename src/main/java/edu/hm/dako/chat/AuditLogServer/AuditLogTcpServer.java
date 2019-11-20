@@ -47,12 +47,15 @@ public class AuditLogTcpServer {
 		try {
 			socket = new TcpServerSocket(AUDIT_LOG_SERVER_PORT, DEFAULT_SENDBUFFER_SIZE, DEFAULT_RECEIVEBUFFER_SIZE);
 			Connection connection = socket.accept();
-			CSVAuditLogWriter calw = new CSVAuditLogWriter();
+
+			String [] header = {"ThreadName", "Message", "ServerThreadName", "UserName", "AuditTime", "PduType"};
+			CSVAuditLogWriter calw = new CSVAuditLogWriter(header);
+
 			System.out.println("Verbindung von ChatServer erhalten");
 
 			while(true) {
 				AuditLogPDU recievedPdu = (AuditLogPDU) connection.receive();
-				System.out.println("M: " + recievedPdu.getMessage());
+
 				try {
 					calw.writeAuditLogPDU(recievedPdu);
 				}

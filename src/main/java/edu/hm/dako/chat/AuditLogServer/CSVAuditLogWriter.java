@@ -2,7 +2,6 @@ package edu.hm.dako.chat.AuditLogServer;
 
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,9 +15,34 @@ public class CSVAuditLogWriter {
     private static String FILENAME = "AuditLogOutput.csv";
 
 
-    public CSVAuditLogWriter() {
+    public CSVAuditLogWriter(String [] header) {
+        writeHeader(header);
+
+    }
+
+    public void writeHeader(String [] header) {
+        BufferedWriter writer;
+        CSVPrinter csvout;
+        try {
+            writer = Files.newBufferedWriter(
+                    Paths.get(FILENAME),
+                    StandardOpenOption.CREATE);
+
+            csvout = new CSVPrinter(writer, CSVFormat.DEFAULT);
 
 
+
+            csvout.printRecord(header);
+            csvout.flush();
+            csvout.close();
+            writer.flush();
+            writer.close();
+
+        } catch (IOException ie) {
+            System.out.println("Fehler beim CSV schreiben");
+        } catch (NullPointerException npe) {
+            System.out.println("NPE in CSV");
+        }
     }
 
     public void writeAuditLogPDU(AuditLogPDU alp) {
@@ -32,7 +56,7 @@ public class CSVAuditLogWriter {
             //out = new FileWriter(FILENAME);
 
             csvout = new CSVPrinter(writer, CSVFormat.DEFAULT);
-
+            
 
             String[] record = {
                     alp.getClientThreadName(),
