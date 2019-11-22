@@ -1,8 +1,27 @@
-ThreadName,Message,ServerThreadName,UserName,AuditTime,PduType
-Client-basti,,,basti,2019-36-20 12:36:01:759,"Login "
-Client-basti,123,,basti,2019-36-20 12:36:04:653,"Chat  "
-Client-123,,,123,2019-11-20 12:45:59:377,"Login "
-Client-123,huhuhuhuhu,,123,2019-11-20 12:46:02:846,"Chat  "
-Client-123,hallo123,,123,2019-11-20 12:46:05:514,"Chat  "
-Client-123,sdfdsa,,123,2019-11-20 12:46:07:780,"Chat  "
-Client-123,,,123,2019-11-20 12:46:11:191,Logout
+ThreadName,Message,ServerThreadName,UserName,AuditTime,PduType,LogTime
+Client-Nickname,,,Nickname,2019-11-22 08:49:55:689,"Login ",2019-11-22 08:49:55:721
+Client-Nickname,neue nachricht,,Nickname,2019-11-22 08:50:01:371,"Chat  ",2019-11-22 08:50:01:374
+Client-Nickname,noch eine nachricht,,Nickname,2019-11-22 08:50:20:772,"Chat  ",2019-11-22 08:50:20:775
+Client-Nickname,1,,Nickname,2019-11-22 08:50:25:636,"Chat  ",2019-11-22 08:50:25:638
+Client-Nickname,2,,Nickname,2019-11-22 08:50:25:921,"Chat  ",2019-11-22 08:50:25:924
+Client-Nickname,32,,Nickname,2019-11-22 08:50:26:233,"Chat  ",2019-11-22 08:50:26:235
+Client-Nickname,1,,Nickname,2019-11-22 08:50:26:504,"Chat  ",2019-11-22 08:50:26:510
+Client-Nickname,3,,Nickname,2019-11-22 08:50:26:767,"Chat  ",2019-11-22 08:50:26:769
+Client-Nickname,23,,Nickname,2019-11-22 08:50:27:063,"Chat  ",2019-11-22 08:50:27:065
+Client-Nickname,21,,Nickname,2019-11-22 08:50:27:349,"Chat  ",2019-11-22 08:50:27:351
+Client-Nickname,,,Nickname,2019-11-22 08:50:27:565,"Chat  ",2019-11-22 08:50:27:567
+Client-Nickname,23,,Nickname,2019-11-22 08:50:27:857,"Chat  ",2019-11-22 08:50:27:859
+Client-Nickname,12,,Nickname,2019-11-22 08:50:28:232,"Chat  ",2019-11-22 08:50:28:237
+Client-Nickname,3,,Nickname,2019-11-22 08:50:28:449,"Chat  ",2019-11-22 08:50:28:451
+Client-Nickname,21,,Nickname,2019-11-22 08:50:28:724,"Chat  ",2019-11-22 08:50:28:727
+Client-Nickname,23,,Nickname,2019-11-22 08:50:29:062,"Chat  ",2019-11-22 08:50:29:065
+Client-Nickname,1,,Nickname,2019-11-22 08:50:29:298,"Chat  ",2019-11-22 08:50:29:300
+Client-Nickname,2,,Nickname,2019-11-22 08:50:29:600,"Chat  ",2019-11-22 08:50:29:603
+Client-Nickname,4,,Nickname,2019-11-22 08:50:29:887,"Chat  ",2019-11-22 08:50:29:890
+Client-Nickname,12,,Nickname,2019-11-22 08:50:30:168,"Chat  ",2019-11-22 08:50:30:170
+Client-Nickname,3,,Nickname,2019-11-22 08:50:30:468,"Chat  ",2019-11-22 08:50:30:470
+Client-Nickname,21,,Nickname,2019-11-22 08:50:30:751,"Chat  ",2019-11-22 08:50:30:753
+Client-Nickname,4,,Nickname,2019-11-22 08:50:31:129,"Chat  ",2019-11-22 08:50:31:133
+Client-Nickname,12,,Nickname,2019-11-22 08:50:31:442,"Chat  ",2019-11-22 08:50:31:443
+Client-Nickname,3211111111111111111111111111111111111111111,,Nickname,2019-11-22 08:50:33:663,"Chat  ",2019-11-22 08:50:33:665
+Client-Nickname,,,Nickname,2019-11-22 08:50:48:639,Logout,2019-11-22 08:50:48:640

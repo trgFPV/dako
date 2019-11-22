@@ -48,8 +48,7 @@ public class AuditLogTcpServer {
 			socket = new TcpServerSocket(AUDIT_LOG_SERVER_PORT, DEFAULT_SENDBUFFER_SIZE, DEFAULT_RECEIVEBUFFER_SIZE);
 			Connection connection = socket.accept();
 
-			String [] header = {"ThreadName", "Message", "ServerThreadName", "UserName", "AuditTime", "PduType"};
-			CSVAuditLogWriter calw = new CSVAuditLogWriter(header);
+			CSVAuditLogWriter calw = new CSVAuditLogWriter();
 
 			System.out.println("Verbindung von ChatServer erhalten");
 
@@ -60,7 +59,7 @@ public class AuditLogTcpServer {
 					calw.writeAuditLogPDU(recievedPdu);
 				}
 				catch (NullPointerException npe) {
-					System.out.println("NPE in Server");
+					System.out.println("NPE while writing auditlog-Log");
 				}
 			}
 		}

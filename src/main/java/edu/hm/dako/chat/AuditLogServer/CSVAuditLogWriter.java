@@ -14,21 +14,27 @@ import edu.hm.dako.chat.common.AuditLogPDU;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
+/**
+ *
+ */
 public class CSVAuditLogWriter {
-    private static String FILENAME = "AuditLogOutput.csv";
+    private String filename = "AuditLogOutput.csv";
+    private static String[] header = {"ThreadName", "Message", "ServerThreadName", "UserName", "AuditTime", "PduType", "LogTime"};
 
-
-    public CSVAuditLogWriter(String [] header) {
+    public CSVAuditLogWriter() {
         writeHeader(header);
-
     }
 
-    public void writeHeader(String [] header) {
+    public CSVAuditLogWriter(String FILENAME) {
+        this.filename = filename;
+    }
+
+    public void writeHeader(String[] header) {
         BufferedWriter writer;
         CSVPrinter csvout;
         try {
             writer = Files.newBufferedWriter(
-                    Paths.get(FILENAME),
+                    Paths.get(filename),
                     StandardOpenOption.CREATE);
 
             csvout = new CSVPrinter(writer, CSVFormat.DEFAULT);
@@ -50,23 +56,25 @@ public class CSVAuditLogWriter {
         BufferedWriter writer;
         CSVPrinter csvout;
         try {
-             writer = Files.newBufferedWriter(
-                    Paths.get(FILENAME),
+            writer = Files.newBufferedWriter(
+                    Paths.get(filename),
                     StandardOpenOption.APPEND,
                     StandardOpenOption.CREATE);
             //out = new FileWriter(FILENAME);
 
             csvout = new CSVPrinter(writer, CSVFormat.DEFAULT);
             DateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
-            Date date = new Date(alp.getAuditTime());
+            Date msgDate = new Date(alp.getAuditTime());
+            Date logDate = new Date();
 
             String[] record = {
                     alp.getClientThreadName(),
                     alp.getMessage(),
                     alp.getServerThreadName(),
                     alp.getUserName(),
-                    simple.format(date),
-                    String.valueOf(alp.getPduType())
+                    simple.format(msgDate),
+                    String.valueOf(alp.getPduType()),
+                    simple.format(logDate)
             };
 
 
@@ -87,7 +95,6 @@ public class CSVAuditLogWriter {
             System.out.println("NPE in CSV");
         }
 
-}
-
+    }
 }
 
