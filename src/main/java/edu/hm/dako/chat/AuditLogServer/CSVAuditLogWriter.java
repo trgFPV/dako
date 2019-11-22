@@ -19,14 +19,16 @@ import org.apache.commons.csv.CSVPrinter;
  */
 public class CSVAuditLogWriter {
     private String filename = "AuditLogOutput.csv";
-    private static String[] header = {"ThreadName", "Message", "ServerThreadName", "UserName", "AuditTime", "PduType", "LogTime"};
+    private static String[] HEADER = {"ThreadName", "Message", "ServerThreadName", "UserName", "AuditTime", "PduType", "LogTime"};
+    private final DateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
 
     public CSVAuditLogWriter() {
-        writeHeader(header);
+        writeHeader(HEADER);
     }
 
     public CSVAuditLogWriter(String FILENAME) {
         this.filename = filename;
+        writeHeader(HEADER);
     }
 
     public void writeHeader(String[] header) {
@@ -42,11 +44,10 @@ public class CSVAuditLogWriter {
             csvout.printRecord(header);
             csvout.flush();
             csvout.close();
-            writer.flush();
-            writer.close();
 
         } catch (IOException ie) {
             System.out.println("Fehler beim CSV schreiben");
+            ie.printStackTrace();
         } catch (NullPointerException npe) {
             System.out.println("NPE in CSV");
         }
@@ -60,10 +61,8 @@ public class CSVAuditLogWriter {
                     Paths.get(filename),
                     StandardOpenOption.APPEND,
                     StandardOpenOption.CREATE);
-            //out = new FileWriter(FILENAME);
 
             csvout = new CSVPrinter(writer, CSVFormat.DEFAULT);
-            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
             Date msgDate = new Date(alp.getAuditTime());
             Date logDate = new Date();
 
@@ -77,22 +76,18 @@ public class CSVAuditLogWriter {
                     simple.format(logDate)
             };
 
-
             for (String s : record) {
-                System.out.print(s + " ");
+                System.out.print(s + " | ");
             }
             System.out.println("");
 
             csvout.printRecord(record);
             csvout.flush();
             csvout.close();
-            writer.flush();
-            writer.close();
 
         } catch (IOException ie) {
             System.out.println("Fehler beim CSV schreiben");
-        } catch (NullPointerException npe) {
-            System.out.println("NPE in CSV");
+            ie.printStackTrace();
         }
 
     }

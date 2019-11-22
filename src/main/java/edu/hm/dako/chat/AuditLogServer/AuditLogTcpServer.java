@@ -14,62 +14,55 @@ import java.net.Socket;
 
 
 /**
- * AuditLog Server fuer die Protokollierung von Chat-Nachrichten eines Chat-Servers. 
+ * AuditLog Server fuer die Protokollierung von Chat-Nachrichten eines Chat-Servers.
  * Implementierung auf Basis von TCP.
- * 
- * @author mandl
  *
+ * @author mandl
  */
 public class AuditLogTcpServer {
-	private static Logger log = Logger.getLogger(AuditLogTcpServer.class);
+    private static Logger log = Logger.getLogger(AuditLogTcpServer.class);
 
-	// Serverport fuer AuditLog-Service
-	static final int AUDIT_LOG_SERVER_PORT = 40001;
+    // Serverport fuer AuditLog-Service
+    static final int AUDIT_LOG_SERVER_PORT = 40001;
 
-	// Standard-Puffergroessen fuer Serverport in Bytes
-	static final int DEFAULT_SENDBUFFER_SIZE = 30000;
-	static final int DEFAULT_RECEIVEBUFFER_SIZE = 800000;
+    // Standard-Puffergroessen fuer Serverport in Bytes
+    static final int DEFAULT_SENDBUFFER_SIZE = 30000;
+    static final int DEFAULT_RECEIVEBUFFER_SIZE = 800000;
 
-	// Name der AuditLog-Datei
-	static final String auditLogFile = new String("ChatAuditLog.dat");
-	static final int PORT = 50001;
+    // Name der AuditLog-Datei
+    static final String auditLogFile = new String("ChatAuditLog.dat");
+    static final int PORT = 50001;
 
-	// Zaehler fuer ankommende AuditLog-PDUs
-	protected long counter = 0;
+    // Zaehler fuer ankommende AuditLog-PDUs
+    protected long counter = 0;
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		PropertyConfigurator.configureAndWatch("log4j.auditLogServer_tcp.properties", 60 * 1000);
-		System.out.println("AuditLog-TcpServer gestartet, Port: " + AUDIT_LOG_SERVER_PORT);
+        PropertyConfigurator.configureAndWatch("log4j.auditLogServer_tcp.properties", 60 * 1000);
+        System.out.println("AuditLog-TcpServer gestartet, Port: " + AUDIT_LOG_SERVER_PORT);
 
-		//TODO: Implementierung des AuditLogServers auf TCP-Basis hier ergaenzen
-		TcpServerSocket socket;
-		try {
-			socket = new TcpServerSocket(AUDIT_LOG_SERVER_PORT, DEFAULT_SENDBUFFER_SIZE, DEFAULT_RECEIVEBUFFER_SIZE);
-			Connection connection = socket.accept();
+        //TODO: Implementierung des AuditLogServers auf TCP-Basis hier ergaenzen
+        try {
+            TcpServerSocket socket = new TcpServerSocket(AUDIT_LOG_SERVER_PORT, DEFAULT_SENDBUFFER_SIZE, DEFAULT_RECEIVEBUFFER_SIZE);
+            Connection connection = socket.accept();
 
-			CSVAuditLogWriter calw = new CSVAuditLogWriter();
+            CSVAuditLogWriter calw = new CSVAuditLogWriter();
 
-			System.out.println("Verbindung von ChatServer erhalten");
+            System.out.println("Verbindung von ChatServer erhalten");
 
-			while(true) {
-				AuditLogPDU recievedPdu = (AuditLogPDU) connection.receive();
+            while (true) {
+                AuditLogPDU recievedPdu = (AuditLogPDU) connection.receive();
+                calw.writeAuditLogPDU(recievedPdu);
 
-				try {
-					calw.writeAuditLogPDU(recievedPdu);
-				}
-				catch (NullPointerException npe) {
-					System.out.println("NPE while writing auditlog-Log");
-				}
-			}
-		}
-		catch (BindException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+            }
+        } catch (BindException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Lost Connection to Chatserver, Exiting");
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 }
