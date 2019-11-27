@@ -26,7 +26,7 @@ public class CSVAuditLogWriter {
         writeHeader(HEADER);
     }
 
-    public CSVAuditLogWriter(String FILENAME) {
+    public CSVAuditLogWriter(String filename) {
         this.filename = filename;
         writeHeader(HEADER);
     }
