@@ -86,7 +86,7 @@ public class CSVAuditLogWriter {
             csvout.close();
 
         } catch (IOException ie) {
-            System.out.println("Fehler beim CSV schreiben");
+            System.out.println("Error while writing CSV");
             ie.printStackTrace();
         }
 

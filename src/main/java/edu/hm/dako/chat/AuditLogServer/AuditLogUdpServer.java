@@ -41,8 +41,6 @@ public class AuditLogUdpServer {
     @Override
     public void run() {
       PropertyConfigurator.configureAndWatch("log4j.auditLogServer_udp.properties", 60 * 1000);
-      System.out.println("AuditLog-UdpServer gestartet, Port: " + AUDIT_LOG_SERVER_PORT);
-
 
       try {
         UdpServerSocket socket = new UdpServerSocket(AUDIT_LOG_SERVER_PORT, DEFAULT_SENDBUFFER_SIZE, DEFAULT_RECEIVEBUFFER_SIZE);
@@ -50,7 +48,7 @@ public class AuditLogUdpServer {
 
         CSVAuditLogWriter calw = new CSVAuditLogWriter(auditLogFile);
 
-        log.info("AuditLog-UdpServer gestartet, Port" + AUDIT_LOG_SERVER_PORT);
+        log.info("Started AuditLog-UdpServer, Port" + AUDIT_LOG_SERVER_PORT);
 
         while (true) {
           AuditLogPDU recievedPdu = (AuditLogPDU) udpConnection.receive();

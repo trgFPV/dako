@@ -55,29 +55,17 @@ public class AuditLogTcpServer {
 
             //TODO: Implementierung des AuditLogServers auf TCP-Basis hier ergaenzen
             try {
-                boolean isInterrupted = false;
                 TcpServerSocket socket = new TcpServerSocket(AUDIT_LOG_SERVER_PORT, DEFAULT_SENDBUFFER_SIZE, DEFAULT_RECEIVEBUFFER_SIZE);
                 Connection connection = socket.accept();
 
                 CSVAuditLogWriter calw = new CSVAuditLogWriter(auditLogFile);
 
-                System.out.println("Verbindung von ChatServer erhalten");
+                System.out.println("Recieved connection from Chat-Server");
 
                 while (true) {
                     AuditLogPDU recievedPdu = (AuditLogPDU) connection.receive();
                     calw.writeAuditLogPDU(recievedPdu);
-
-                    if (recievedPdu.getPduType().equals("Chat  ")) {
-
-                        String codewordCheck = recievedPdu.getMessage();
-                        String codeword = "kacke";
-
-                        if (codewordCheck.equals(codeword)) {
-                            System.out.println("erwischt!");
-                            break;
-                        }
-
-                    }
+                    log.info("CSV-Line written");
                 }
 
             } catch (BindException e) {
