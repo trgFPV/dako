@@ -8,6 +8,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 import java.io.IOException;
 import java.net.BindException;
+import java.util.Scanner;
 
 public class AuditLogUdpServer {
 
@@ -27,33 +28,44 @@ public class AuditLogUdpServer {
   protected long counter = 0;
 
   public static void main(String[] args) {
-    PropertyConfigurator.configureAndWatch("log4j.auditLogServer_udp.properties", 60 * 1000);
-    System.out.println("AuditLog-UdpServer gestartet, Port: " + AUDIT_LOG_SERVER_PORT);
+    Scanner scanner = new Scanner(System.in);
+    Thread auditLogUdpServerThread = new Thread(new AuditLogUdpServerThread());
+    auditLogUdpServerThread.start();
+
+    scanner.next();
+    System.exit(0);
+  }
+
+  static class AuditLogUdpServerThread implements Runnable {
+
+    @Override
+    public void run() {
+      PropertyConfigurator.configureAndWatch("log4j.auditLogServer_udp.properties", 60 * 1000);
+      System.out.println("AuditLog-UdpServer gestartet, Port: " + AUDIT_LOG_SERVER_PORT);
 
 
-    try {
-      UdpServerSocket socket = new UdpServerSocket(AUDIT_LOG_SERVER_PORT, DEFAULT_SENDBUFFER_SIZE, DEFAULT_RECEIVEBUFFER_SIZE);
-      Connection udpConnection = socket.accept();
+      try {
+        UdpServerSocket socket = new UdpServerSocket(AUDIT_LOG_SERVER_PORT, DEFAULT_SENDBUFFER_SIZE, DEFAULT_RECEIVEBUFFER_SIZE);
+        Connection udpConnection = socket.accept();
 
-      CSVAuditLogWriter calw = new CSVAuditLogWriter(auditLogFile);
+        CSVAuditLogWriter calw = new CSVAuditLogWriter(auditLogFile);
 
-      log.info("AuditLog-UdpServer gestartet, Port" + AUDIT_LOG_SERVER_PORT);
+        log.info("AuditLog-UdpServer gestartet, Port" + AUDIT_LOG_SERVER_PORT);
 
-      while (true) {
-        AuditLogPDU recievedPdu = (AuditLogPDU) udpConnection.receive();
-        calw.writeAuditLogPDU(recievedPdu);
-        log.info("CSV-Line written");
+        while (true) {
+          AuditLogPDU recievedPdu = (AuditLogPDU) udpConnection.receive();
+          calw.writeAuditLogPDU(recievedPdu);
+          log.info("CSV-Line written");
+        }
+
+      } catch (BindException e) {
+        e.printStackTrace();
+      } catch (IOException e) {
+        System.out.println("Lost Connection to Chatserver, Exiting");
+        System.exit(0);
+      } catch (Exception e) {
+        e.printStackTrace();
       }
-
-    } catch (BindException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      System.out.println("Lost Connection to Chatserver, Exiting");
-      System.exit(0);
-    } catch (Exception e) {
-      e.printStackTrace();
     }
-
-
   }
 }

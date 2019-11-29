@@ -18,7 +18,7 @@ import org.apache.commons.csv.CSVPrinter;
  *
  */
 public class CSVAuditLogWriter {
-    private String filename = "AuditLogOutput.csv";
+    private String filename = "AuditLogOutputTCP.csv";
     private static String[] HEADER = {"ThreadName", "Message", "ServerThreadName", "UserName", "AuditTime", "PduType", "LogTime"};
     private final DateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
 
