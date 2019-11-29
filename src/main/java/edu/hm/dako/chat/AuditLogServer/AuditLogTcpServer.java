@@ -39,7 +39,7 @@ public class AuditLogTcpServer {
         Scanner scanner = new Scanner(System.in);
         Thread auditLogTcpServerThread = new Thread(new AuditLogTcpServerThread());
         auditLogTcpServerThread.start();
-
+        System.out.println("Type anything + Enter to exit");
         scanner.next();
         System.exit(0);
 

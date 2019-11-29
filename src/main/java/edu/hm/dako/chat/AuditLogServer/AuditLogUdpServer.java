@@ -31,7 +31,7 @@ public class AuditLogUdpServer {
     Scanner scanner = new Scanner(System.in);
     Thread auditLogUdpServerThread = new Thread(new AuditLogUdpServerThread());
     auditLogUdpServerThread.start();
-
+    System.out.println("Type anything + Enter to exit");
     scanner.next();
     System.exit(0);
   }
