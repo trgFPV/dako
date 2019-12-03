@@ -28,8 +28,7 @@ public class AuditLogTcpServer {
     static final int DEFAULT_RECEIVEBUFFER_SIZE = 800000;
 
     // Name der AuditLog-Datei
-    static final String auditLogFile = new String("ChatAuditLog_TCP.c" +
-            "sv");
+    static final String auditLogFile = new String("auditlogs/ChatAuditLog_TCP.csv");
     static final int PORT = 50001;
 
     // Zaehler fuer ankommende AuditLog-PDUs
@@ -46,6 +45,9 @@ public class AuditLogTcpServer {
 
     }
 
+    /**
+     * Thread for recieving  the CSV.
+     */
     static class AuditLogTcpServerThread implements Runnable {
 
         @Override
@@ -53,18 +55,17 @@ public class AuditLogTcpServer {
             PropertyConfigurator.configureAndWatch("log4j.auditLogServer_tcp.properties", 60 * 1000);
             System.out.println("AuditLog-TcpServer gestartet, Port: " + AUDIT_LOG_SERVER_PORT);
 
-            //TODO: Implementierung des AuditLogServers auf TCP-Basis hier ergaenzen
             try {
                 TcpServerSocket socket = new TcpServerSocket(AUDIT_LOG_SERVER_PORT, DEFAULT_SENDBUFFER_SIZE, DEFAULT_RECEIVEBUFFER_SIZE);
                 Connection connection = socket.accept();
 
-                CSVAuditLogWriter calw = new CSVAuditLogWriter(auditLogFile);
+                CSVAuditLogWriter csvAuditLogWriter = new CSVAuditLogWriter(auditLogFile);
 
                 System.out.println("Recieved connection from Chat-Server");
 
                 while (true) {
                     AuditLogPDU recievedPdu = (AuditLogPDU) connection.receive();
-                    calw.writeAuditLogPDU(recievedPdu);
+                    csvAuditLogWriter.writeAuditLogPDU(recievedPdu);
                     log.info("CSV-Line written");
                 }
 

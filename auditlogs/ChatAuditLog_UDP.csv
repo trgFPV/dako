@@ -1,0 +1,7 @@
+ThreadName,Message,ServerThreadName,UserName,AuditTime,PduType,LogTime
+Client-bastiudp,,,bastiudp,2019-12-03 10:48:58:978,"Login ",2019-12-03 10:48:59:032
+Client-bastiudp,halllo,,bastiudp,2019-12-03 10:49:04:135,"Chat  ",2019-12-03 10:49:04:137
+Client-bastiudp,vielleicht ist ja udp schneller oder so,,bastiudp,2019-12-03 10:49:09:841,"Chat  ",2019-12-03 10:49:09:843
+Client-bastiudp,mehr messages,,bastiudp,2019-12-03 10:49:13:196,"Chat  ",2019-12-03 10:49:13:197
+Client-bastiudp,blabla,,bastiudp,2019-12-03 10:49:14:781,"Chat  ",2019-12-03 10:49:14:784
+Client-bastiudp,,,bastiudp,2019-12-03 10:49:17:996,Logout,2019-12-03 10:49:17:997

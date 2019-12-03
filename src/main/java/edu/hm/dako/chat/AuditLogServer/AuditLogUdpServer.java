@@ -22,7 +22,7 @@ public class AuditLogUdpServer {
   static final int DEFAULT_RECEIVEBUFFER_SIZE = 800000;
 
   // Name der AuditLog-Datei
-  static final String auditLogFile = new String("ChatAuditLog_UDP.csv");
+  static final String auditLogFile = new String("auditlogs/ChatAuditLog_UDP.csv");
 
   // Zaehler fuer ankommende AuditLog-PDUs
   protected long counter = 0;

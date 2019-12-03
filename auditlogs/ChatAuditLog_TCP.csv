@@ -1,0 +1,6 @@
+ThreadName,Message,ServerThreadName,UserName,AuditTime,PduType,LogTime
+Client-basti,,,basti,2019-12-03 10:44:18:924,"Login ",2019-12-03 10:44:18:939
+Client-basti,huhu,,basti,2019-12-03 10:44:21:985,"Chat  ",2019-12-03 10:44:21:987
+Client-basti,wieso ist das eigentlich null?,,basti,2019-12-03 10:44:30:729,"Chat  ",2019-12-03 10:44:30:731
+Client-basti,|,,basti,2019-12-03 10:44:35:178,"Chat  ",2019-12-03 10:44:35:178
+Client-basti,,,basti,2019-12-03 10:44:41:782,Logout,2019-12-03 10:44:41:783
