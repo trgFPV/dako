@@ -36,8 +36,10 @@ public class AuditLogTcpServer {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         Thread auditLogTcpServerThread = new Thread(new AuditLogTcpServerThread());
         auditLogTcpServerThread.start();
+
         System.out.println("Type anything + Enter to exit");
         scanner.next();
         System.exit(0);
@@ -46,7 +48,7 @@ public class AuditLogTcpServer {
     }
 
     /**
-     * Thread for recieving  the CSV.
+     * Thread for recieving  the AuditLogPdu.
      */
     static class AuditLogTcpServerThread implements Runnable {
 
@@ -63,6 +65,9 @@ public class AuditLogTcpServer {
 
                 System.out.println("Recieved connection from Chat-Server");
 
+                /* Unfortunatley the method recieve of the Connection class does not throw a InterruptException.
+                   If it would throw such an Exception it would be possible to check on this condition.
+                 */
                 while (true) {
                     AuditLogPDU recievedPdu = (AuditLogPDU) connection.receive();
                     csvAuditLogWriter.writeAuditLogPDU(recievedPdu);

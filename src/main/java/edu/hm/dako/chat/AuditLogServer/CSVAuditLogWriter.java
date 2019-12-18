@@ -15,18 +15,28 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
 /**
- *
+ * This class handels the writing of the csv log file.
  */
 public class CSVAuditLogWriter {
     private String filename = null;
     private static String[] HEADER = {"ThreadName", "Message", "ServerThreadName", "UserName", "AuditTime", "PduType", "LogTime"};
     private final DateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
 
+    /**
+     * Create a CSVAuditLogWriter.
+     *
+     * @param filename output file
+     */
     public CSVAuditLogWriter(String filename) {
         this.filename = filename;
         writeHeader(HEADER);
     }
 
+    /**
+     * Writes the header of the csv file
+     *
+     * @param header header as a String array
+     */
     public void writeHeader(String[] header) {
         BufferedWriter writer;
         CSVPrinter csvout;
@@ -49,6 +59,11 @@ public class CSVAuditLogWriter {
         }
     }
 
+    /**
+     * Writes an AuditLogPdu as an csv line.
+     *
+     * @param alp The AuditLogPdu which shall be written.
+     */
     public void writeAuditLogPDU(AuditLogPDU alp) {
         BufferedWriter writer;
         CSVPrinter csvout;
