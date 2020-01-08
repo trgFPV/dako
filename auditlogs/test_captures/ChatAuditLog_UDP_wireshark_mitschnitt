@@ -1,0 +1,6 @@
+ThreadName,Message,ServerThreadName,UserName,AuditTime,PduType,LogTime
+Client-client1,,,client1,2019-11-08 17:41:54:550,"Login ",2019-11-08 17:41:42:619
+Client-client2,,,client2,2019-11-08 17:42:01:465,"Login ",2019-11-08 17:41:49:176
+Client-client1,Test,,client1,2019-11-08 17:42:14:365,"Chat  ",2019-11-08 17:42:02:075
+Client-client2,,,client2,2019-11-08 17:42:24:602,Logout,2019-11-08 17:42:12:312
+Client-client1,,,client1,2019-11-08 17:42:32:941,Logout,2019-11-08 17:42:20:651
